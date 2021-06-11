@@ -5,7 +5,7 @@ import soundfile as sf
 import numpy as np
 from scipy.signal import butter, lfilter
 from itertools import chain
-# from normalize_audio import normalize_audio
+from filter_noise import append_silence, filter_audio
 import threading
 # from code_filter_and_normalize import butter_bandpass_filter, append_silence
 from dvg_ringbuffer import RingBuffer
@@ -38,7 +38,7 @@ def record():
         ######     Nhận biết tiếng nói và Cắt câu
         if max(data) >= 2000:
             # data = normalize(data)
-            data = butter_bandpass_filter(data, low, high, sr, 6)
+            data = filter_audio(sr, data)
             data = data.astype(np.int16)
             # ls.extend(data)
             rb.extend(data)
