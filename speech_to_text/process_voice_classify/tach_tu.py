@@ -50,9 +50,9 @@ def normalize(infile, rms_level=0):
 
     # export data to file
     # sf.write("D:/Project/process_voice/process_voice_classify/audio_data/bat/example.wav", y, fs, 'PCM_16')#.astype(np.int16)
-name = "bat_p_test"
-path = "audio_raw/"
-file_save = 56
+name = "bdpk"
+path = "test_audio/test_sentence/"
+file_save = 0
 # normalize(path, 20)
 pt = 0
 sr, data = read(path + name + ".wav")
@@ -65,7 +65,7 @@ data_n = data.astype(np.int16)
 # data_n = [i * 12 for i in data]
 # data_n = np.array(data_n)
 # data_n = data_n.astype(np.int16)
-sf.write("test_audio/bat/bat_test.wav", data_n, sr, 'PCM_16')
+# sf.write("test_audio/bat/bat_test.wav", data_n, sr, 'PCM_16')
 # print("done")
 for l in range(int(len(data_n) / 1024)):
     data1 = data_n[pt:pt + 1024]
@@ -85,7 +85,7 @@ for l in range(int(len(data_n) / 1024)):
         #     data_filter = Convert(data_scan)
         #     y = np.add(data_filter, data_scan)
         #     data_new.extend(y)
-        elif len(data_new) > 400 and a == 0:
+        elif len(data_new) > 1000 and a == 0:
             # if max(data_new) < 22000:
             #     # value_thresh = int((22000 / max(data_new)))
             # data_new1 = [i * 10 for i in data_new]
@@ -94,11 +94,11 @@ for l in range(int(len(data_n) / 1024)):
             data_new = np.array(data_new)
             data_new = data_new.astype(np.int16)
 
-            if os.path.isdir('test_audio/' + name):
-                sf.write("test_audio/{0}/{0}_{1}.wav".format(name, file_save), data_new, sr, 'PCM_16')
+            if os.path.isdir('test_audio/test_sentence/' + name):
+                sf.write("test_audio/test_sentence/{0}/{0}_{1}.wav".format(name, file_save), data_new, sr, 'PCM_16')
             else:
-                os.mkdir('test_audio/' + name)
-                sf.write("test_audio/{0}/{0}_{1}.wav".format(name, file_save), data_new, sr, 'PCM_16')
+                os.mkdir('test_audio/test_sentence/' + name)
+                sf.write("test_audio/test_sentence/{0}/{0}_{1}.wav".format(name, file_save), data_new, sr, 'PCM_16')
 
             # sf.write("test_audio/{0}/{0}_{1}.wav".format(name, file_save), data_new, sr, 'PCM_16')
 

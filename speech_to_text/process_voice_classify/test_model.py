@@ -84,14 +84,14 @@ if __name__ == "__main__":
 
     # create 2 instances of the keyword spotting service
     kss = Keyword_Spotting_Service()
-    kss1 = Keyword_Spotting_Service()
-
-    # check that different instances of the keyword spotting service point back to the same object (singleton)
-    assert kss is kss1
+    # kss1 = Keyword_Spotting_Service()
+    #
+    # # check that different instances of the keyword spotting service point back to the same object (singleton)
+    # assert kss is kss1
 
     # make a prediction
-    file_name = "bat_p_test"
-    path = "test_audio/"
+    file_name = "bdpk"
+    path = "test_audio/test_sentence/"
     entries = os.listdir(path)
     for i in entries:
         # print(path + '{0}/*.wav'.format(i))
