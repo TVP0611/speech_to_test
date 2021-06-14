@@ -17,7 +17,7 @@ def filter_audio(sr:int, signal, thresh=6000):
     if max(signal) > 20000:
         down_vol = max(signal) // thresh
         signal = [s / down_vol for s in signal]
-    elif max(signal) <= 6000:
+    elif max(signal) <= 5000:
         up_vol = 20000 // max(signal)
         signal = [s * up_vol for s in signal]
     # filter noise

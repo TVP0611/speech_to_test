@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 import os
 
-SAVED_MODEL_PATH = "model.h5"
+SAVED_MODEL_PATH = "D:/train_model_speech_to_test/speech_to_text/process_voice_classify/model.h5"
 SAMPLES_TO_CONSIDER = 8000
 
 class _Keyword_Spotting_Service:
@@ -84,14 +84,15 @@ if __name__ == "__main__":
 
     # create 2 instances of the keyword spotting service
     kss = Keyword_Spotting_Service()
-    # kss1 = Keyword_Spotting_Service()
-    #
-    # # check that different instances of the keyword spotting service point back to the same object (singleton)
-    # assert kss is kss1
+    kss1 = Keyword_Spotting_Service()
 
+    # # check that different instances of the keyword spotting service point back to the same object (singleton)
+    assert kss is kss1
+    # keyword, acc = kss.predict("D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_p_test/bat_p_test_56.wav")  # test_audio/bat/bat_42.wav
+    # print(keyword, max(acc) * 100)
     # make a prediction
-    file_name = "bdpk"
-    path = "test_audio/test_sentence/"
+    file_name = "test_realtime"
+    path = "D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/"
     entries = os.listdir(path)
     for i in entries:
         # print(path + '{0}/*.wav'.format(i))

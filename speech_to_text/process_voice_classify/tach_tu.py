@@ -50,8 +50,8 @@ def normalize(infile, rms_level=0):
 
     # export data to file
     # sf.write("D:/Project/process_voice/process_voice_classify/audio_data/bat/example.wav", y, fs, 'PCM_16')#.astype(np.int16)
-name = "bdpk"
-path = "test_audio/test_sentence/"
+name = "bat_p"
+path = "D:/train_model_speech_to_test/speech_to_text/process_voice_classify/audio_sample/"
 file_save = 0
 # normalize(path, 20)
 pt = 0
