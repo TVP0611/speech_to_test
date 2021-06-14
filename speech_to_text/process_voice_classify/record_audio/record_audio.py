@@ -16,21 +16,21 @@ p = pyaudio.PyAudio()
 stream = p.open(format=pyaudio.paInt16, channels=1, rate=8000,
                 input=True, frames_per_buffer=1024)
 
-rb = RingBuffer(600000, dtype=np.int16)
+rb = RingBuffer(64000, dtype=np.int16)
 pt = 0
+val_wait = 0
 signals = []
 low = 100.0
 high = 3900.0
 sr = 8000
 file_save = 0
 audio_split = []
-# low = 100.0
-# high = 3900.0
 data_new = []
 # max_val = []
 # count_pulse = []
 
 def record():
+    global pt, val_wait
     while True:
         #####      Bắt tín hiệu audio
         data = np.frombuffer(stream.read(1024), dtype=np.int16)
@@ -42,16 +42,20 @@ def record():
             data = data.astype(np.int16)
             # ls.extend(data)
             rb.extend(data)
-            # a = 0
-            # if len(ls) > 4800000:
-            #     ls.clear()
-            #     pt = 0
+            val_wait = 0
+        else:
+            val_wait += 1
+            if val_wait == 20000:
+                rb.clear()
+                pt = 0
+
 
 t2 = threading.Thread(target=record, daemon=True)
 ######      Bắt đầu chạy thread
 t2.start()
 
 while 1:
+    pass
     try:
         assert len(np.array(rb)) >= 1024
     except:
@@ -79,10 +83,11 @@ while 1:
                 if len(data_new) > 5:
                     data_new = list(chain.from_iterable(data_new))
                     data_new = append_silence(data_new)
-                    data_new = normalize_audio(fs=sr, signals=data_new)
-                    audio_split.append(data_new)
+                    # data_new = normalize_audio(fs=sr, signals=data_new)
+                    # audio_split.append(data_new)
+                    data_new = np.array(data_new).astype(np.int16)
                     # print(type(data_new))
-                    sf.write("save_audio_test/file_agc_{0}.wav".format(file_save), data_new, sr, 'PCM_16')
+                    sf.write("D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/test_realtime/file_audio_rt_{0}.wav".format(file_save), data_new, sr, 'PCM_16')
                     data_new = []
                     file_save += 1
                     print('save done {}'.format(file_save))

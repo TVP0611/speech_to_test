@@ -12,7 +12,7 @@ def append_silence(data_new):
     return data_new
 
 def filter_audio(sr:int, signal, thresh=6000):
-    '''signal : int16, thresh(default) : 6000'''
+    """signal : int16, thresh(default) : 6000"""
     # check the volume loud or low (normalize (1))
     if max(signal) > 20000:
         down_vol = max(signal) // thresh
@@ -27,7 +27,7 @@ def filter_audio(sr:int, signal, thresh=6000):
     output = filtfilt(b[0], b[1], signal).astype(np.int16)
     return output
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     sr, signal = wavfile.read('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/test_sentence/file_test_audio.wav')#D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/test_sentence/noise.wav
     output = filter_audio(sr, signal, 10000)
