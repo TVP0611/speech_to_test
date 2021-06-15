@@ -85,7 +85,7 @@ file_save = 0
 audio = []
 audio_split = []
 data_new = []
-name = "off_p"
+name = "noise_p"
 path = "D:/train_model_speech_to_test/speech_to_text/process_voice_classify/audio_sample/"
 file_save = 0
 

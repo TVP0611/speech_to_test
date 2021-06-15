@@ -18,6 +18,7 @@ class _Keyword_Spotting_Service:
         "dung",
         "mo",
         "ngat",
+        "noise",
         "off",
         "on",
         "tat"

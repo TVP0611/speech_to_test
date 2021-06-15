@@ -92,17 +92,14 @@ while 1:
                 # count_pulse.append(0)
                 # len_max.append(len(data_new))
                 if len(data_new) > 5:
+                    # print(len(data_new))
                     data_new = list(chain.from_iterable(data_new))
                     data_new = append_silence(data_new)
-                    # data_new = normalize_audio(fs=sr, signals=data_new)
-                    # audio_split.append(data_new)
                     data_new1 = np.array(data_new)#.astype(np.int16)
-                    # print(type(data_new))
-                    # sf.write("D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/test_realtime/file_audio_rt_{0}.wav".format(file_save), data_new, sr, 'PCM_16')
                     keyword, acc = kss.predict(data_new1)  # test_audio/bat/bat_42.wav
                     print(keyword, max(acc) * 100)
                     data_new = np.array(data_new).astype(np.int16)
-                    sf.write("D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/test_realtime/file_audio_rt_{0}.wav".format(file_save), data_new, sr, 'PCM_16')
+                    # sf.write("D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/test_realtime/file_audio_rt_{0}.wav".format(file_save), data_new, sr, 'PCM_16')
                     data_new = []
                     file_save += 1
                     print('save done {}'.format(file_save))
