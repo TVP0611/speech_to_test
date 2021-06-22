@@ -1,96 +1,99 @@
-# import speech_recognition as sr
+import speech_recognition as sr
+import audioop
+
+r = sr.Recognizer()
+# while True:
+#     with sr.Microphone(sample_rate=8000) as source:
+with sr.AudioFile('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_den_ap_tran.wav') as source:
+    # with sr.Microphone(sample_rate=8000) as source:
+    audio = r.listen(source, phrase_time_limit=5)
+    # print(audio.get_wav_data())
+    # flac_data = audio.get_flac_data()
+        # with open('speech_test_stt_gg.wav', 'wb') as f:
+        #     f.write(audio.get_wav_data())
+        # print("done")
+
+    try:
+        text = r.recognize_google(audio, language="vi-VN")
+        print(text)
+        # if text == name_butler:
+        #     stop_event.set()
+        # return text
+    except:
+        print("...")
+        # return 0
+
 #
-# r = sr.Recognizer()
-# # while True:
-#     # with sr.Microphone(sample_rate=8000) as source:
-# with sr.AudioFile('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_den_ap_tran.wav') as source:
-#     audio = r.listen(source, phrase_time_limit=5)
-#     # print(audio.get_wav_data())
-#     flac_data = audio.get_flac_data()
-        # # with open('speech_test_stt_gg.wav', 'wb') as f:
-        # #     f.write(audio.get_wav_data())
-        # # print("done")
-
-        # try:
-        #     text = r.recognize_google(audio, language="vi-VN")
-        #     print(text)
-        #     # if text == name_butler:
-        #     #     stop_event.set()
-        #     # return text
-        # except:
-        #     print("...")
-#             # return 0
-
-import wave
-import json
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
-from urllib.error import URLError, HTTPError
-
-# wave.open('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_den_ap_tran.wav', 'rb')
-# flac_data = wave.Wave_read.readframes()
-# flac_data = flac_data[int((len(flac_data)-31951)):]
-
 # import wave
+# import json
+# from urllib.parse import urlencode
+# from urllib.request import Request, urlopen
+# from urllib.error import URLError, HTTPError
 #
+# # wave.open('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_den_ap_tran.wav', 'rb')
+# # flac_data = wave.Wave_read.readframes()
+# # flac_data = flac_data[int((len(flac_data)-31951)):]
 #
-# with wave.open('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_den_ap_tran.wav') as fd:
-#     params = fd.getparams()
-#     flac_data = fd.readframes(1000000) # 1 million frames max
+# # import wave
+# #
+# #
+# # with wave.open('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_den_ap_tran.wav') as fd:
+# #     params = fd.getparams()
+# #     flac_data = fd.readframes(1000000) # 1 million frames max
+# #
+# # # print(params)
 #
-# # print(params)
-
-# w = wave.open('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_den_ap_tran.wav', 'rb')
-# for i in range(w.getnframes()):
-#     frame = w.readframes(i)
+# # w = wave.open('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_den_ap_tran.wav', 'rb')
+# # for i in range(w.getnframes()):
+# #     frame = w.readframes(i)
+# #
+# # print('done')
 #
-# print('done')
-
-with open('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_den_ap_tran.flac', 'rb') as f:
-    flac_data = f.read()
-# print('done')
-class RequestError(Exception): pass
-class UnknownValueError(Exception): pass
-
-language="vi-VN"
-
-key = "AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw"
-url = "http://www.google.com/speech-api/v2/recognize?{}".format(urlencode({
-    "client": "chromium",
-    "lang": language,
-    "key": key,
-}))
-request = Request(url, data=flac_data, headers={"Content-Type": "audio/x-flac; rate={}".format(8000)})
-
-# obtain audio transcription results
-try:
-    response = urlopen(request, timeout=None)
-except HTTPError as e:
-    raise RequestError("recognition request failed: {}".format(e.reason))
-except URLError as e:
-    raise RequestError("recognition connection failed: {}".format(e.reason))
-response_text = response.read().decode("utf-8")
-
-# ignore any blank blocks
-actual_result = []
-for line in response_text.split("\n"):
-    if not line: continue
-    result = json.loads(line)["result"]
-    if len(result) != 0:
-        actual_result = result[0]
-        break
-
-# return results
-if not isinstance(actual_result, dict) or len(actual_result.get("alternative", [])) == 0: raise UnknownValueError()
-
-if "confidence" in actual_result["alternative"]:
-    # return alternative with highest confidence score
-    best_hypothesis = max(actual_result["alternative"], key=lambda alternative: alternative["confidence"])
-else:
-    # when there is no confidence available, we arbitrarily choose the first hypothesis.
-    best_hypothesis = actual_result["alternative"][0]
-if "transcript" not in best_hypothesis: raise UnknownValueError()
-text = best_hypothesis["transcript"]
+# with open('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_den_ap_tran.flac', 'rb') as f:
+#     flac_data = f.read()
+# # print('done')
+# class RequestError(Exception): pass
+# class UnknownValueError(Exception): pass
+#
+# language="vi-VN"
+#
+# key = "AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw"
+# url = "http://www.google.com/speech-api/v2/recognize?{}".format(urlencode({
+#     "client": "chromium",
+#     "lang": language,
+#     "key": key,
+# }))
+# request = Request(url, data=flac_data, headers={"Content-Type": "audio/x-flac; rate={}".format(8000)})
+#
+# # obtain audio transcription results
+# try:
+#     response = urlopen(request, timeout=None)
+# except HTTPError as e:
+#     raise RequestError("recognition request failed: {}".format(e.reason))
+# except URLError as e:
+#     raise RequestError("recognition connection failed: {}".format(e.reason))
+# response_text = response.read().decode("utf-8")
+#
+# # ignore any blank blocks
+# actual_result = []
+# for line in response_text.split("\n"):
+#     if not line: continue
+#     result = json.loads(line)["result"]
+#     if len(result) != 0:
+#         actual_result = result[0]
+#         break
+#
+# # return results
+# if not isinstance(actual_result, dict) or len(actual_result.get("alternative", [])) == 0: raise UnknownValueError()
+#
+# if "confidence" in actual_result["alternative"]:
+#     # return alternative with highest confidence score
+#     best_hypothesis = max(actual_result["alternative"], key=lambda alternative: alternative["confidence"])
+# else:
+#     # when there is no confidence available, we arbitrarily choose the first hypothesis.
+#     best_hypothesis = actual_result["alternative"][0]
+# if "transcript" not in best_hypothesis: raise UnknownValueError()
+# text = best_hypothesis["transcript"]
 
 
 #!/usr/bin/env python3
