@@ -1,27 +1,27 @@
-import speech_recognition as sr
-import audioop
-
-r = sr.Recognizer()
-# while True:
-#     with sr.Microphone(sample_rate=8000) as source:
-with sr.AudioFile('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_den_ap_tran.wav') as source:
-    # with sr.Microphone(sample_rate=8000) as source:
-    audio = r.listen(source, phrase_time_limit=5)
-    # print(audio.get_wav_data())
-    # flac_data = audio.get_flac_data()
-        # with open('speech_test_stt_gg.wav', 'wb') as f:
-        #     f.write(audio.get_wav_data())
-        # print("done")
-
-    try:
-        text = r.recognize_google(audio, language="vi-VN")
-        print(text)
-        # if text == name_butler:
-        #     stop_event.set()
-        # return text
-    except:
-        print("...")
-        # return 0
+# import speech_recognition as sr
+# import audioop
+#
+# r = sr.Recognizer()
+# # while True:
+# #     with sr.Microphone(sample_rate=8000) as source:
+# with sr.AudioFile('D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/bat_den_ap_tran.wav') as source:
+#     # with sr.Microphone(sample_rate=8000) as source:
+#     audio = r.listen(source, phrase_time_limit=5)
+#     # print(audio.get_wav_data())
+#     # flac_data = audio.get_flac_data()
+#         # with open('speech_test_stt_gg.wav', 'wb') as f:
+#         #     f.write(audio.get_wav_data())
+#         # print("done")
+#
+#     try:
+#         text = r.recognize_google(audio, language="vi-VN")
+#         print(text)
+#         # if text == name_butler:
+#         #     stop_event.set()
+#         # return text
+#     except:
+#         print("...")
+#         # return 0
 
 #
 # import wave
@@ -138,3 +138,19 @@ with sr.AudioFile('D:/train_model_speech_to_test/speech_to_text/process_voice_cl
 # #
 # # # do some more unrelated things
 # # while True: time.sleep(0.1)  # we're not listening anymore, even though the background thread might still be running for a second or two while cleaning up and stopping
+
+
+import numpy as np
+from numpy_ringbuffer import RingBuffer
+
+rb = RingBuffer(capacity=3, dtype=np.int16)
+
+ls = [1,2,4,6,7,8,9,12,0]
+ls1 = [1,2,33,4,5,6,67,7]
+ls2 = [114,4,324,234,535,231,1,2,1,1,1]
+ls3 = [11,42,34,24,35,21,13,42,41,15,17]
+rb.append(ls)
+rb.append(ls1)
+rb.extend(ls2)
+rb.extend(ls3)
+print(len(rb))

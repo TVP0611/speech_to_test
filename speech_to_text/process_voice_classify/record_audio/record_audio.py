@@ -53,7 +53,9 @@ def convert_stt(flac_data):
             break
 
     # return results
-    if not isinstance(actual_result, dict) or len(actual_result.get("alternative", [])) == 0: raise UnknownValueError()
+    if not isinstance(actual_result, dict) or len(actual_result.get("alternative", [])) == 0:
+        #raise UnknownValueError()
+        return None
 
     if "confidence" in actual_result["alternative"]:
         # return alternative with highest confidence score
@@ -164,13 +166,13 @@ while 1:
                     # data_new = np.array(data_new).astype(np.int16)
                     ''''''
                     data_flac.extend(data_new)
-                    if len(data_flac) > 20000:
-                        data_flac = np.array(data_flac).astype(np.int16)
-                        data_bytes = bytes(data_flac)
-                        flac_converter = convert_array_audio_to_flac(data_bytes)
-                        text = convert_stt(flac_converter)
-                        print(text)
-                        data_flac = []
+
+                    data_flac = np.array(data_flac).astype(np.int16)
+                    data_bytes = bytes(data_flac)
+                    flac_converter = convert_array_audio_to_flac(data_bytes)
+                    text = convert_stt(flac_converter)
+                    print(text)
+                    data_flac = []
                     # data_new = np.array(data_new).astype(np.int16)
                     # sf.write("D:/train_model_speech_to_test/speech_to_text/process_voice_classify/test_audio/test_realtime/file_audio_rt_{0}.wav".format(file_save), data_new, sr, 'PCM_16')
                     data_new = []
