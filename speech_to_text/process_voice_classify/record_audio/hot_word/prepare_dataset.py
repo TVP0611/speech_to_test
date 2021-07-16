@@ -20,8 +20,8 @@ def extract_feature(path_file):
     return S_dB.T
 
 if __name__ == '__main__':
-    path_positive = "audio_split/"
-    path_negative = "train_audio/noise/"
+    path_positive = "positive/"
+    path_negative = "negatives/"
 
     sample_data = extract_feature("train_audio/background/1.wav")
     num_sample = len(os.listdir(path_negative)) + len(os.listdir(path_positive))
@@ -47,3 +47,5 @@ if __name__ == '__main__':
 
     np.save("Xtrain.npy", np.asarray(x))
     np.save("Ytrain.npy", np.asarray(y))
+
+print('done')

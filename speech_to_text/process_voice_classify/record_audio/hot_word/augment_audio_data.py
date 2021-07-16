@@ -67,7 +67,7 @@ def pitch_shifting(_wav, _num):
         sf.write('positive/acis_{0}_pitch_sf_{1}.wav'.format(_num, i), _wav_pitch_sf, 8000, 'PCM_16')
 
 
-path = "New folder/"
+path = "audio_split/"
 file = os.listdir(path)
 for f in file:
     wav, sr = librosa.load(path + f, sr=None)

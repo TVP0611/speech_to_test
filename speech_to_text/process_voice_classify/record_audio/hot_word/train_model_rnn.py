@@ -30,5 +30,5 @@ x_train, x_valid, y_train, y_valid = train_test_split(x, y, test_size=0.1, rando
 
 model.fit(x_train, y_train, validation_data=(x_valid, y_valid), batch_size=32, epochs=12, shuffle=True)
 model.save('model.h5')
-
+print('done')
 

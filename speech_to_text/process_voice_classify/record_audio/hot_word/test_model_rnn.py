@@ -117,7 +117,8 @@ chunk_samples = int(fs * chunk_duration) # Each read length in number of samples
 
 # Each model input data duration in seconds, need to be an integer numbers of chunk_duration
 feed_duration = 10
-feed_samples = int(fs * feed_duration)
+# feed_samples = int(fs * feed_duration)
+feed_samples = 7000
 
 assert feed_duration/chunk_duration == int(feed_duration/chunk_duration)
 
@@ -142,7 +143,7 @@ def get_spectrogram(data):
     #     pxx, _, _ = mlab.specgram(data[:, 0], nfft, fs, noverlap=noverlap)
     # return pxx
 
-    data = data.astype(np.float64)
+    data = data.astype(np.float32)
     sr = 8000
     num_step = int(sr * 1)
     if len(data) > num_step:
@@ -200,7 +201,7 @@ q = Queue()
 
 run = True
 
-silence_threshold = 300
+silence_threshold = 200
 
 # Run the demo for a timeout seconds
 timeout = time.time() + 1 * 60  # 0.5 minutes from now
@@ -230,21 +231,24 @@ def callback(in_data, frame_count, time_info, status):
 stream = get_audio_input_stream(callback)
 stream.start_stream()
 
-try:
-    while run:
-        data = q.get()
-        spectrum = get_spectrogram(data)
-        preds = detect_triggerword_spectrum(spectrum)
-        new_trigger = has_new_triggerword(preds, chunk_duration, feed_duration)
-        if new_trigger:
-            sys.stdout.write('1')
-except (KeyboardInterrupt, SystemExit):
-    stream.stop_stream()
-    stream.close()
-    timeout = time.time()
-    run = False
-
-stream.stop_stream()
-stream.close()
+# try:
+while 1:
+    data = q.get()
+    # print(len(data))
+    spectrum = get_spectrogram(data)
+    preds = detect_triggerword_spectrum(spectrum)
+    # print(preds[0])
+    # new_trigger = has_new_triggerword(preds, chunk_duration, feed_duration)
+    if preds[0] > 0.5:
+        sys.stdout.write('1')
+# except (KeyboardInterrupt, SystemExit):
+    stream.start_stream()
+#     stream.stop_stream()
+#     stream.close()
+#     timeout = time.time()
+#     run = False
+#
+# stream.stop_stream()
+# stream.close()
 
 
