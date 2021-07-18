@@ -1,6 +1,9 @@
 import pyaudio
-from prepare_dataset import extract_feature
+# from prepare_dataset import extract_feature
 # from train_model_rnn import *
+
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, GRU
@@ -242,7 +245,7 @@ while 1:
     if preds[0] > 0.5:
         sys.stdout.write('1')
 # except (KeyboardInterrupt, SystemExit):
-    stream.start_stream()
+#     stream.start_stream()
 #     stream.stop_stream()
 #     stream.close()
 #     timeout = time.time()

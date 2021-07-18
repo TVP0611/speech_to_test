@@ -2,14 +2,14 @@ import librosa
 import numpy as np
 import soundfile as sf
 
-path_file = 'train_audio/background/raw_2.wav'
+path_file = 'train_audio/background/raw_3.wav'
 y, sr = librosa.load(path_file, sr=8000)
 
 print(len(y))
 
 array_audio_1s = []
 position = 0
-file_save = 778
+file_save = 1961
 
 while True:
     data = y[position:position+8000]
