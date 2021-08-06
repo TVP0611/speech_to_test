@@ -1,0 +1,21 @@
+Hotword Detection
+
+Bước 1: Trim Hotword-(HW)
+	Điều kiện: phải cắt đùng từ mới nhận diện được
+	- Hiện tại cắt sai và cắt nhầm còn nhiều
+
+
+Bước 2: Detect
+	Dùng phương pháp DTW( Dynamic time warping) để nhận diện
+	1) Lưu ít nhất 5 file .wav mẫu của HW --convert--> MFCC để so sánh
+	2) Dùng phương pháp DTW để so sánh tính ra khoảng cách(thay vì ra phần trăm
+	   thì DTW sẽ ra khoảng cách) ta xét ngưỡng khoảng cách để quyết định độ giống nhau của các HW
+	
+	Trong ảnh là kết quả của 16 file wav có từ "acis ơi" để test: kết quả là True hết và thời gian khi nhận diện tất cả đều chạy trên ram
+	
+	Khi test realtime đa số là False vì cắt nhầm nên chưa biết độ chính xác thực tế
+
+
+
+
+

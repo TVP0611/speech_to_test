@@ -1,7 +1,3 @@
-import pyaudio
-# from prepare_dataset import extract_feature
-# from train_model_rnn import *
-
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
@@ -11,23 +7,18 @@ from tensorflow.keras.layers import Activation
 from tensorflow.keras.models import load_model
 from tensorflow.keras import optimizers
 import tensorflow.keras
-import numpy as np
 
+from datetime import datetime
+import soundfile as sf
 import librosa
 import numpy as np
-import time
-from pydub import AudioSegment
-import random
-import sys
-import io
-import os
-import glob
-import IPython
-# from td_utils import *
-import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
-# To generate wav file from np array.
-from scipy.io.wavfile import write
+
+import pyaudio
+from queue import Queue
+from threading import Thread
+import sys
+import time
 
 model = load_model('model.h5')
 
@@ -121,10 +112,9 @@ chunk_samples = int(fs * chunk_duration) # Each read length in number of samples
 # Each model input data duration in seconds, need to be an integer numbers of chunk_duration
 feed_duration = 10
 # feed_samples = int(fs * feed_duration)
-feed_samples = 7000
+feed_samples = 8000
 
 assert feed_duration/chunk_duration == int(feed_duration/chunk_duration)
-
 
 def get_spectrogram(data):
     """
@@ -192,13 +182,6 @@ def get_audio_input_stream(callback):
         stream_callback=callback)
     return stream
 
-
-import pyaudio
-from queue import Queue
-from threading import Thread
-import sys
-import time
-
 # Queue to communiate between the audio callback and main thread
 q = Queue()
 
@@ -236,14 +219,19 @@ stream.start_stream()
 
 # try:
 while 1:
+    now = datetime.now()
     data = q.get()
     # print(len(data))
     spectrum = get_spectrogram(data)
     preds = detect_triggerword_spectrum(spectrum)
     # print(preds[0])
     # new_trigger = has_new_triggerword(preds, chunk_duration, feed_duration)
-    if preds[0] > 0.5:
+    if preds[0] > 0.7:
         sys.stdout.write('1')
+        dt_string = now.strftime("%d%m%Y_%H%M%S")
+        sf.write('user_data/id_user_{0}.wav'.format(dt_string), data, 8000, 'PCM_16')
+        ######     save audio, print (+)
+        sys.stdout.write('+')
 # except (KeyboardInterrupt, SystemExit):
 #     stream.start_stream()
 #     stream.stop_stream()

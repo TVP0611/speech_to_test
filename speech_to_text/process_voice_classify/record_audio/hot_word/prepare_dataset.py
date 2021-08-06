@@ -1,3 +1,9 @@
+import warnings
+
+with warnings.catch_warnings():
+    warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+
 import numpy as np
 import librosa
 import tqdm

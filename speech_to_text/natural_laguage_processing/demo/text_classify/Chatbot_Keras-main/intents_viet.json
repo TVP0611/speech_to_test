@@ -1,0 +1,35 @@
+{"intents": [
+    {"tag": "greeting",
+     "patterns": ["Hi", "Hey", "xin chào", "chào bạn", "quản gia ơi", "bạn ơi", "Hello", "Hay"],
+     "responses": ["Hello", "Hi", "Chào bạn", "Chào homie", "lâu quá không gặp!"]
+    },
+    {"tag": "goodbye",
+     "patterns": ["Bye", "See you later", "Goodbye", "See you again", "hẹn gặp lại", "tạm biệt", "chào tạm biệt", "vĩnh biệt", "bye", "mai gặp nha"],
+     "responses": ["See you later", "hẹn gặp lại", "Bye!", "tạm biệt bạn", "mai gặp lại nha", "có gì cứ gọi mình nha"]
+    },
+    {"tag": "thanks",
+     "patterns": ["Thanks", "Thank you", "cảm ơn", "cảm ơn đã giúp mình nha", "thanks bạn nha", "cảm ơn rất nhiều"],
+     "responses": ["Tôi rất vui khi giúp được bạn!", "Không có gì!", "Tôi rất vui khi được giúp bạn!", "Cần mình giúp cứ gọi mình nha!", "Không có gì đâu homie!", "Khách sáo quá homie!"]
+    },
+    {"tag": "control",
+        "patterns": ["bật đèn phòng khách", "tắt đèn chùm phòng khách", "trời hôm nay nóng quá", "trời hôm nay lạnh quá", "tắt van nước sân vườn", "tôi muốn đi ngủ", "tôi buồn ngủ quá", 
+                    "ngắt van nước", "đóng rèm phòng ngủ", "tôi cảm thấy nóng quá", "tôi cảm thấy lạnh quá", "mở tivi phòng ngủ", "nóng quá", "lạnh quá", "tối quá",
+                    "đóng tất cả thiết bị", "tắt tất cả thiết bị", "chuyển kênh tivi", "giảm nhiệt độ máy lạnh", "tăng nhiệt độ máy lạnh", "đi ngủ", "tiễn khách", "đón khách", "thực hiện nhữ cảnh ra ngoài", "chạy kịch bản tiễn khách", "mở kịch bản đón khách"],
+        "responses": ["Đã mở thiết bị {0}", "Ngữ cảnh {0} đã được thực hiện", "Thiết bị {0} đã được bật", "Đã tắt thiết bị {0}"]
+    },
+    {"tag": "media",
+        "patterns": ["Mở nhạc sơn tùng", "bật nhạc remix", "chơi một bài hát của hà anh tuấn", "mở nhạc", "bật nhạc", "tắt nhạc", "dừng nhạc"],
+        "responses": ["Bài hát {0} của bạn đã được mở", "mời bạn lắng nghe ca khúc của {0}", "đã tắt nhạc", "yêu cầu dừng nhạc của bạn đã được thực hiện"]
+    },
+    {"tag": "setting",
+    "patterns": ["thiết lập thiết bị", "cài đặt thiết bị", "cấu hình thiết bị", "thiết lập nhắc báo tưới cây sau 15 phút", "nhắc tôi 15 phút nữa tắt bếp", "nhắc tôi uống thuốc lúc 13 giờ 30 phút", "thiết lập ngữ cảnh tiễn khách", "cấu hình ngữ cảnh đón khách", 
+                "hủy lệnh nhắc báo lúc 10 giờ", "xóa thiết bị đèn tranh ra khỏi danh sách thiết bị", "hủy lệnh nhắc báo", "nhắc báo tôi với câu", "nhớ nhắc tôi sau 2 tiếng nữa đi mua đồ", "nhớ nhắc tôi sau 2 tiếng nữa đi mua đồ", "thiết lập mở đèn trần sau 3 tiếng nữa", 
+                "cài đặt mở đèn trần vào lúc 18h mỗi ngày", "cài đặt", "setting"],
+    "responses": ["thiết bị {0} của bạn đã được thiết lập hẹn giờ mở", "Ngữ cảnh {0} đã được cài đặt", "lệnh nhắc báo {0} đã được thiết lập", "bạn cứ yên tâm tôi sẽ nhắc bạn {0}"]
+    },
+    {"tag": "complaint",
+    "patterns": ["không được", "dừng lệnh ngay", "tôi khống muốn thực hiện lệnh này", "tắt ngay đi", "đóng lại", "dẹp đi"],
+    "responses": ["Tôi xin lỗi vì sự bất tiện đã gây ra cho bạn. Tôi cần phải học nhiều nữa.", "Tôi xin lỗi và sẽ ghi nhận hành động của bạn. Tôi sẽ không để sự việc này tái diễn nữa."]
+    }
+]
+}
