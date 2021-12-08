@@ -1,0 +1,14 @@
+tiến độ công việc:
+    - Wake word model nhận diện (ổn khoảng 80% ở đk im lặng bình thường, 
+khoảng 65-72% ở đk ồn( mở nhạc ở mức hơi lớn), nhận diện sai khoảng 20%).
+
+    -Keyword (bật, đóng, dừng, mở, ngắt, on, off, tắt)
+
+    - Model nhận diện Keyword (ổn khoảng 65-70% ở đk im lặng bình thường, 
+khoảng 55-60% ở đk ồn( mở nhạc ở mức hơi lớn), nhận diện sai khoảng 30%).
+
+    - Model nhận diện Keyword ở dạng hình ảnh Spectrogram (ổn khoảng ổn khoảng 70-75% ở đk im lặng bình thường, 
+khoảng 55-60% ở đk ồn( mở nhạc ở mức hơi lớn), nhận diện sai khoảng 30%).
+
+    - Model phân loại câu nói (control, setting, question, media)(ổn khoảng ổn khoảng 70-80%, 
+nhận diện sai khoảng 30%).

@@ -124,7 +124,7 @@ def get_spectrogram(data):
     predictions -- one channel / dual channel audio data as numpy array
 
     Returns:
-    pxx -- spectrogram, 2-D array, columns are the periodograms of successive segments.
+        pxx -- spectrogram, 2-D array, columns are the periodograms of successive segments.
     """
     # nfft = 200  # Length of each window segment
     # fs = 8000  # Sampling frequencies

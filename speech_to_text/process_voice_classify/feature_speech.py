@@ -3,7 +3,7 @@ import os
 import json
 
 DATASET_PATH = "audio_data"
-JSON_PATH = "data.json"
+JSON_PATH = "data1.json"
 SAMPLES_TO_CONSIDER = 8000#8000#22050 # 1 sec. of audio
 
 

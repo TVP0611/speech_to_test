@@ -1,0 +1,11 @@
+1. apu hỗ trợ quantization model theo kiểu dữ liệu nào (INT8, FP32...).
+2. Quantization model theo kiểu dữ liệu nào chạy ổn định hơn.
+3. Khi quantization model độ chính xác giảm như thế nào, 
+   kích thước model giảm bao nhiêu so với model ban đầu.
+4. Các loại neural network nào được hỗ trợ trên apu(ANN, RNN, CNN,...)
+   CNN: cho images
+   RNN: cho auido, text, time series
+5. Tốc độ xử lý trên apu, cpu, gpu khác nhau như thế nào.
+6. Làm sao biết được là model đang chạy trên apu, cpu hay gpu.
+7. Chạy song song nhiều model trên apu được không.
+8. Có ảnh hưởng gì đến tốc độ và độ chính xác khi chạy song song nhiều model.
